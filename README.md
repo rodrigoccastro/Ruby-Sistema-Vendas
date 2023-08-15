@@ -17,6 +17,6 @@ Configuração inicial
 
 3) executar os scripts do banco estão na pasta Model/Script/
 
-4) alterar as propriedades de acesso ao banco no arquivo Model/UtilPropertiesConnection.rb
+4) alterar as propriedades de usuário e senha de acesso ao banco no arquivo Model/UtilPropertiesConnection.rb
 
 5) executar no terminal: ruby vendas.rb
