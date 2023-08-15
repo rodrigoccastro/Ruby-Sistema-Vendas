@@ -26,13 +26,8 @@ class Connection
     end
 
     def self.setConnection(conn)
-        objUtil = UtilPropertiesConnection.new
-        begin
+        if !conn.nil?
             @@arrConnection[@@arrConnection.size] = conn
-        rescue
-
-        ensure
-
         end
     end
   

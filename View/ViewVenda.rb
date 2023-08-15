@@ -18,7 +18,7 @@ class ViewVenda
                 id_venda = obj.id
                 imprimeObj(obj)
                 arrProdutos = objController.getListProdutos(id_venda)
-                puts "\tLita de Produtos"
+                puts "\tLista de Produtos"
                 arrProdutos.each do |objVendaProduto|
                     imprimeObjVendaProduto(objVendaProduto)
                 end

@@ -12,6 +12,6 @@ class UtilPropertiesConnection
         return "postgres"
     end
     def getDatabaseSenha()
-        return "barnabe"
+        return "postgres"
     end
 end
