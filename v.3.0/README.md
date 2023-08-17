@@ -3,7 +3,7 @@
 Sales System in Ruby to access postgres database.
 
 In this system there are 4 actions (List, search by key, add, change)
-for four entities (product, vendors, customer, sale).
+for four entities (products, sellers, clients, sales).
 
 ========================
 
