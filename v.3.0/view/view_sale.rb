@@ -40,15 +40,17 @@ class ViewSale < View
         puts "\tClient Info"
         puts "\t\tId: #{objClient.id} - Name: #{objClient.name} - Email: #{objClient.email}"
         puts "\t\tPhone: #{objClient.phone} - Address: #{objClient.address}"
+        puts "\t\tCreated: #{objClient.created} - Updated: #{objClient.updated}"
 
         objSeller = obj.seller
         puts "\tSeller Info"
         puts "\t\tId: #{objSeller.id} - Name: #{objSeller.name} - Email: #{objSeller.email}"
         puts "\t\tPhone: #{objSeller.phone} - Address: #{objSeller.address}"
+        puts "\t\tCreated: #{objSeller.created} - Updated: #{objSeller.updated}"
 
         puts "\tList of Products"
         obj.productsales.each do |productsale|
-            puts "\t\tId: #{productsale.product_id} - name: #{productsale.product.name} - price: #{productsale.price} - quantity: #{productsale.quantity}"
+            puts "\t\tId: #{productsale.product_id} - name: #{productsale.product.name} - price: $ #{productsale.price} - quantity: #{productsale.quantity}"
         end
     end
 
