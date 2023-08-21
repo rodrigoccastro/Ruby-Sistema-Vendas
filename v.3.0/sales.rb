@@ -1,5 +1,5 @@
 require 'active_record'
-require_relative "./view/Home.rb"
+require_relative "./view/home.rb"
 
 ActiveRecord::Base.establish_connection(
   adapter: 'postgresql',

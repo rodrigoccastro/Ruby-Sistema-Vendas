@@ -9,7 +9,7 @@ class ViewSeller < View
     end
 
     def printObj(obj)               
-        puts "Id: #{obj.id} - Name: #{obj.name} - Email: #{obj.email} - Phone: #{obj.phone} - Address: #{obj.address} - Address: #{obj.datetime}"
+        puts "Id: #{obj.id} - Name: #{obj.name} - Email: #{obj.email} - Phone: #{obj.phone} - Address: #{obj.address} - Created: #{obj.created} - Updated: #{obj.updated}"
     end
 
     def getData()

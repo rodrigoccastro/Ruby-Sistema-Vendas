@@ -45,9 +45,12 @@ class View
             puts "\n#{@nameItem} saved!"
         else
             puts "\nError: #{@nameItem} NOT saved!"
-            resp.errors.each do |error|
-                puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
+            if !resp.errors.nil?
+                resp.errors.each do |error|
+                    puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
+                end
             end
+            puts "--> message: #{message}" if !resp.message.nil?            
         end
     end
 
@@ -63,9 +66,12 @@ class View
             puts "\n#{@nameItem} updated!"
         else
             puts "\nError: #{@nameItem} NOT saved!"
-            resp.errors.each do |error|
-                puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
+            if !resp.errors.nil?
+                resp.errors.each do |error|
+                    puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
+                end
             end
+            puts "--> message: #{message}" if !resp.message.nil?            
         end
     end
 

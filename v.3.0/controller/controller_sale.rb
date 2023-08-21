@@ -6,5 +6,5 @@ class ControllerSale < Controller
     def initialize()
         super(ServiceSale.new)
     end
-    
+
 end

@@ -9,7 +9,7 @@ class ViewProduct < View
     end
 
     def printObj(obj)               
-        puts "Id: #{obj.id} - Name: #{obj.name} - Price: #{obj.price}"
+        puts "Id: #{obj.id} - Name: #{obj.name} - Price: #{obj.price} - Created: #{obj.created} - Updated: #{obj.updated}"
     end
 
     def getData()
