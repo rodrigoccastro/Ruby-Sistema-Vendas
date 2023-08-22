@@ -24,7 +24,7 @@ class ViewClient < View
         puts "\nEnter address:"
         address = gets.delete!("\n")
     
-        return OpenStruct.new(:id => id, :name => name, :email => email, :phone => phone, :address => address)
+        return {:id => id, :name => name, :email => email, :phone => phone, :address => address} 
     end
 
 end

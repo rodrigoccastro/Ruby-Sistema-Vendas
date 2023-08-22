@@ -26,10 +26,11 @@ class View
         puts "\nEnter id:"
         id = gets.delete!("\n")
         obj = @controller.find(id)
-        if (!obj.nil?)
-            printObj(obj)
-        else
+        if obj.nil?
             puts "\n#{@nameItem} NOT found!"
+            return nil 
+        else
+            printObj(obj)
         end
     end  
 
@@ -39,18 +40,19 @@ class View
 
     def insert()
         obj = getData()
+        return if obj.nil?
         resp = @controller.insert(obj)
     
-        if (resp.success)
+        if (resp[:success])
             puts "\n#{@nameItem} saved!"
         else
             puts "\nError: #{@nameItem} NOT saved!"
-            if !resp.errors.nil?
-                resp.errors.each do |error|
+            if !resp[:errors].nil?
+                resp[:errors].each do |error|
                     puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
                 end
             end
-            puts "--> message: #{message}" if !resp.message.nil?            
+            puts "--> message: #{resp[:message]}" if !resp[:message].nil?            
         end
     end
 
@@ -60,18 +62,23 @@ class View
 
     def update()
         obj = getData()
+        pesq = @controller.find(obj[:id])
+        if pesq.nil?
+            puts "\n#{@nameItem} NOT found by id #{obj[:id]} !"
+            return nil 
+        end
         resp = @controller.update(obj)
     
-        if (resp.success)
+        if (resp[:success])
             puts "\n#{@nameItem} updated!"
         else
             puts "\nError: #{@nameItem} NOT saved!"
-            if !resp.errors.nil?
-                resp.errors.each do |error|
+            if !resp[:errors].nil?
+                !resp[:errors].each do |error|
                     puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
                 end
             end
-            puts "--> message: #{message}" if !resp.message.nil?            
+            puts "--> message: #{resp[:message]}" if !resp[:message].nil?           
         end
     end
 

@@ -14,23 +14,58 @@ class ViewSale < View
     def getData()
         puts "\nEnter Client Id:"
         client_id = gets.delete!("\n")
+        client = Client.find(client_id)
+        if client.nil?
+            puts "\nClient NOT found!"
+            return nil 
+        else
+            puts client.name
+        end
+
         puts "\nEnter Seller Id:"
         seller_id = gets.delete!("\n")
+        seller = Seller.find(seller_id)
+        if seller.nil?
+            puts "\nSeller NOT found!"
+            return nil 
+        else
+            puts seller.name
+        end
+
         puts "\nEnter number of products in this sale:"
         qtd = gets.delete!("\n").to_i
+        if qtd<=0
+            puts "\nInvalid quantity!"
+            return nil 
+        end
+
         count = 0;
         productsales = [];
         while count < qtd 
             contador = count+1
+
             puts "\nEnter Product Id of number (#{contador}):"
             product_id = gets.delete!("\n")
+            product = Product.find(product_id)
+            if product.nil?
+                    puts "\nProduct NOT found!"
+                return nil 
+            else
+                puts product.name
+            end
+
             puts "\nEnter how many products of number (#{contador}):"
-            quantity = gets.delete!("\n")
-            productsale = OpenStruct.new(:product_id => product_id, :quantity => quantity)
+            quantity = gets.delete!("\n").to_i
+            if quantity<=0
+                puts "\nInvalid quantity!"
+                return nil 
+            end
+
+            productsale = {:product_id => product_id, :quantity => quantity}
             productsales[count] = productsale;
             count = count+1
         end
-        return OpenStruct.new(:client_id => client_id, :seller_id => seller_id, :productsales => productsales)
+        return {:client_id => client_id, :seller_id => seller_id, :productsales => productsales}
     end
 
     def printObj(obj)               
@@ -48,29 +83,40 @@ class ViewSale < View
         puts "\t\tPhone: #{objSeller.phone} - Address: #{objSeller.address}"
         puts "\t\tCreated: #{objSeller.created} - Updated: #{objSeller.updated}"
 
+        total = 0
         puts "\tList of Products"
         obj.productsales.each do |productsale|
-            puts "\t\tId: #{productsale.product_id} - name: #{productsale.product.name} - price: $ #{productsale.price} - quantity: #{productsale.quantity}"
+            partial = (productsale.price * productsale.quantity)
+            puts "\t\tId: #{productsale.product_id} - name: #{productsale.product.name} - price: $ #{productsale.price} - quantity: #{productsale.quantity} --> partial: #{partial}"
+            total = total + partial
         end
+
+        puts "\tTotal: $ #{total}"
     end
 
     def update()
         puts "\nEnter id:"
         id = gets.delete!("\n")
+        sale = Sale.find(id)
+        if sale.nil?
+            puts "\nSale NOT found!"
+            return nil 
+        end
+
         obj = getData()
-        obj.id = id
+        obj[:id] = id
 
         resp = @controller.update(obj)
-        if (resp.success)
+        if (resp[:success])
             puts "\n#{@nameItem} updated!"
         else
             puts "\nError: #{@nameItem} NOT saved!"
-            if !resp.errors.nil?
-                resp.errors.each do |error|
+            if !resp[:errors].nil?
+                resp[:errors].each do |error|
                     puts "--> attribute: #{error.attribute} - type: #{error.type} - options: #{error.options}"
                 end
             end
-            puts "--> message: #{message}" if !resp.message.nil?            
+            puts "--> message: #{resp[:message]}" if !resp[:message].nil?               
         end
     end
 

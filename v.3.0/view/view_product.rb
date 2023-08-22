@@ -20,7 +20,7 @@ class ViewProduct < View
         puts "\nEnter price:"
         price = gets.delete!("\n")
     
-        return OpenStruct.new(:id => id, :name => name, :price => price)
+        return {:id => id, :name => name, :price => price}
     end
 
 end
